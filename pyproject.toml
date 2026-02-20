@@ -1,0 +1,43 @@
+[project]
+name = "cparrun"
+description = "cparrun - combinated parallel run of something as multiple processes"
+readme = "README.md"
+authors = [
+    {name = "itledevs", email = "itledevs@gmail.com"},
+]
+license = "Apache-2.0"
+# https://pypi.org/classifiers/
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+requires-python = ">= 3.9"
+dependencies = [
+    "typer",
+]
+dynamic = ["version"]
+keywords = ["parallel", "run", "process"]
+
+[project.urls]
+Repository =  "https://github.com/itledevs/cparrun"
+"Source code" = "https://github.com/itledevs/cparrun"
+"Issue tracker" = "https://github.com/itledevs/cparrun/issues"
+Documentation = "https://github.com/itledevs/cparrun/wiki"
+
+[project.scripts]
+cparrun = "cparrun.cparrun:main"
+
+[tool.setuptools.dynamic]
+# The version number will be read from __version__ in src/cparrun/__init__.py
+version.attr = "cparrun.__version__"
+
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
