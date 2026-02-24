@@ -6,9 +6,9 @@
 Could be used as **command line utility** or **python module**.
 Command line utility mode could interpret arguments as multiple combinations or run in parallel set of lines from stdin as shell commands.
 
-Output results are in **JSON** format with separated stdout, stderr, return_code, status.
-In case of python module the result will be list of dicts and the same structure.
-Main purpose: parallel debugging/troubleshooting, mass checking or just use with slow or unstable network/corporate utilities. Started like a parallel manager for mass invocation thousands of external utilities from python, evolved to a python module and then to a cli utility. Outputting results in JSON format greatly simplifies any further automatic data processing. For example you could filter from thousands some kind of "failed" and re-run them again and again (simple jq filter example is given below).
+Output results are in **JSON** format with separated stdout, stderr, return_code, status. \
+In case of python module the result will be list of dicts and the same structure. \
+Main purpose: parallel debugging/troubleshooting, mass checking or just to use with slow or unstable network/corporate utilities in parallel for more perfomance. Added timeout to avoid eternal freezing or long execution of utilities. Started like a parallel manager for mass invocation thousands of external utilities from python, evolved to a python module and then to a cli utility. Outputting results in JSON format greatly simplifies any further automatic data processing. For example you could filter from thousands some kind of "failed" and re-run them again and again (simple jq filter example is given below).
 
 ## Installation
 ```sh
