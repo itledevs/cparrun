@@ -197,5 +197,54 @@ cat 100500_commands_list.txt | cparrun --stdin --parallel=50 --timeout=5
 ```
 ---
 
-Other examples
-https://github.com/itledevs/cparrun/wiki
+## Python module
+
+**Methods**
+
+> **parallel_run**(commands: list, shell=None, parallel=10, timeout=10, env=None) -> list[dict]
+>
+> *run commands in parallel*
+> - commands: command list for paralleling.
+> - shell: Use shell as mediate layer (True) or not (False)
+>   shell = None: auto-define. if input cmd_args is list/tuple - shell=False, in case cmd_args is string - shell=True
+> - parallel: how many processes could be opened in one time
+> - timeout: set time limit for subprocesses (seconds)
+> - env: set environment variables for passthrough
+> 
+> result is list of dictionaries form: [{'task_id': str, 'command': str|list, 'stdout': str, 'stderr': str, 'return_code': int, 'status': str}, ...]
+
+
+> **combinate_lists**(input_list: list) -> list
+>
+> Converts "expandable" list by unfolding nested lists to combinations:
+> something like ['ping', '-n', '-c2', ['192.168.1.1', '192.168.1.2']]
+> will be combinated to [['ping', '-n', '-c2', '192.168.1.1'], ['ping', '-n', '-c2', '192.168.1.2']]
+
+
+cparrun uses subprocess.Popen under the hood, this determines the further format of the arguments.
+to use cparrun.parallel_run you need to form commands in a list/tuple like
+```
+# more precise and faster form
+[
+  ['command1', 'arg1', 'arg2', ..],
+  ['command2', 'arg1', 'arg2', ..],
+  ...
+]
+```
+or just in strings but commands in such case will be interpreted by system shell (it works slower)
+```
+[
+  'command1 arg1 arg2 ..',
+  'command2 arg1 arg2 ..',
+  ...
+]
+```
+**Usage**
+```python
+import cparrun
+expandable_list = ['ping', '-n', '-c2', ['google.com', 'gmail.com', 'kubernetes.io', 'github.com', 'python.org', 'nonexistentdomain.example']]
+cmd_list = cparrun.combinate_lists(expandable_list)
+
+result = cparrun.parallel_run(commands=cmd_list, timeout=2)
+```
+
